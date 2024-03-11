@@ -8,8 +8,7 @@ pipeline {
     stage('Build image') {
       steps{
         script {
-        docker.withRegistry("${registry}") {
-          docker.build("react-app:${env.BUILD_ID}")
+          def dockerImage = docker.build("react-app")
          }
         }
       }
