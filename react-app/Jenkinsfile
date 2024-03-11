@@ -1,0 +1,43 @@
+pipeline {
+
+def registry = 'europe-west1-docker.pkg.dev/interview-prj1/web'
+  agent any
+  stages {
+    stage('Checkout Source') {
+      steps {
+        git 'https://github.com/YOURUSERNAME/jenkins-kubernetes-deployment.git'
+      }
+    }
+    stage('Build image') {
+    docker.withRegistry(${registry}) {
+        docker.build("react-app:${env.BUILD_ID}")
+        docker.image('react-app').inside {
+            sh 'make test'
+        }
+    }
+    stage ('Test image'){
+        docker.withRegistry(${registry}) {
+        docker.image('react-app').inside {
+            sh 'make test'
+        }
+    }
+    }
+    stage('Pushing Image') {
+      steps{
+        script {
+          docker.withRegistry(${registry}) {
+            dockerImage.push("latest")
+          }
+        }
+      }
+    }
+    stage('Deploying React.js container to Kubernetes') {
+      steps {
+        script {
+          kubernetesDeploy(configs: "deployment.yaml", 
+                                    "service.yaml")
+        }
+      }
+    }
+  }
+}
