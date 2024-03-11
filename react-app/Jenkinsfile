@@ -34,10 +34,10 @@ def registry = 'europe-west1-docker.pkg.dev/interview-prj1/web'
     stage('Deploying React.js container to Kubernetes') {
       steps {
         script {
-          kubernetesDeploy(configs: "deployment.yaml", 
-                                    "service.yaml")
+          kubernetesDeploy(configs: "deployment.yaml")
         }
       }
     }
   }
+}
 }
