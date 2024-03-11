@@ -4,7 +4,7 @@ def registry = 'europe-west1-docker.pkg.dev/interview-prj1/web'
 pipeline {
   agent any
   tools{
-    docker "docker"
+    dockerTool "docker"
   }
   stages {
     stage('Build image') {
