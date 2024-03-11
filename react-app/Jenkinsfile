@@ -11,7 +11,7 @@ pipeline {
       steps{
         script {
 
-          def dockerImage = docker.build("react-app:${env.BUILD_ID}")
+          def dockerImage = docker.build("react-app:${env.BUILD_ID}", "-f ./Dockerfile" )
 
         }
       }
