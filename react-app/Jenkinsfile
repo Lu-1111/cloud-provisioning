@@ -7,26 +7,28 @@ pipeline {
   stages {
     stage('Build image') {
       steps{
-        docker.withRegistry(${registry}) {
-        docker.build("react-app:${env.BUILD_ID}")
-        docker.image('react-app').inside {
-            sh 'make test'
+        script {
+        docker.withRegistry("${registry}") {
+          docker.build("react-app:${env.BUILD_ID}")
+         }
         }
-    }
       }
-    stage ('Test image'){
+    }
+    stage('Test image'){
       steps{
-        docker.withRegistry(${registry}) {
+        script {
+        docker.withRegistry("${registry}") {
         docker.image('react-app').inside {
             sh 'make test'
+            }
+          }
         }
-    }
       }
     }
     stage('Pushing Image') {
       steps{
         script {
-          docker.withRegistry(${registry}) {
+          docker.withRegistry("${registry}") {
           dockerImage.push("latest")
           }
         }
