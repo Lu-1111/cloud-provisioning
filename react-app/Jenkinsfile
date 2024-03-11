@@ -3,12 +3,11 @@ def registry = 'europe-west1-docker.pkg.dev/interview-prj1/web'
 
 pipeline {
   agent any
-
-  stages {
-    stage('Initialize'){
+    environment {
         def dockerHome = tool 'docker'
         env.PATH = "${dockerHome}/bin:${env.PATH}"
     }
+  stages {
     stage('Build image') {
       steps{
         script {
