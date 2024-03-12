@@ -9,8 +9,8 @@ COPY /react-app/package-lock.json .
 #install all the React.js application dependencies
 RUN npm i
 #copy folders
-COPY /react-app/src .
-COPY /react-app/public .
+COPY /react-app/src ./src
+COPY /react-app/public ./public
 #Expose the React.js application container on port 3000
 EXPOSE 3000
 #The command to start the React.js application container
