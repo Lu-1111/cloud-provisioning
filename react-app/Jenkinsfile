@@ -5,6 +5,9 @@ def registry = 'europe-west1-docker.pkg.dev/interview-prj1/web'
 
 pipeline {
   agent any
+  environment {
+    SECRET_FILE = credentials('my-creds')
+  }
   stages {
     stage ('check '){
       steps{
@@ -38,15 +41,15 @@ pipeline {
     stage('Pushing Image') {
       steps{
         script {
-          withCredentials([file(credentialsId: 'my-creds', variable: 'interview-prj1-4e6bb07fceea.json')]) {
+
            sh  '''
-           gcloud  auth login --cred-file=interview-prj1-4e6bb07fceea.json
+           gcloud auth activate-service-account --key-file=$SECRET_FILE
            gcloud auth configure-docker europe-west1-docker.pkg.dev
         
             docker tag react-app europe-west1-docker.pkg.dev/interview-prj1/web/react-app
             docker image push europe-west1-docker.pkg.dev/interview-prj1/web/react-app
             '''
-          }
+          
         }
       }
     }
