@@ -30,7 +30,7 @@ pipeline {
       steps{
         script {
           sh '''
-          docker run react-app npm run --rm test'
+          docker run react-app npm run --rm test
           '''
         }
       }
