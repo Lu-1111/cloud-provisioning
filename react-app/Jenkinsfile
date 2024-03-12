@@ -26,17 +26,15 @@ pipeline {
         }
       }
     }
-    // stage('Test image'){
-    //   steps{
-    //     script {
-    //     docker.withRegistry("${registry}") {
-    //     docker.image('react-app').inside {
-    //         sh 'make test'
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
+    stage('Test image'){
+      steps{
+        script {
+          sh '''
+          docker run react-app npm run start
+          '''
+        }
+      }
+    }
     stage('Pushing Image') {
       steps{
         script {
@@ -46,7 +44,7 @@ pipeline {
           }
         }
       }
-    }
+  }
     // stage('Deploying React.js container to Kubernetes') {
     //   steps {
     //     script {
