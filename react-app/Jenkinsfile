@@ -39,7 +39,7 @@ pipeline {
       steps{
         script {
            sh  '''
-            docker image push gs://europe-west1-docker.pkg.dev/interview-prj1/web
+            docker image push europe-west1-docker.pkg.dev/interview-prj1/web
             '''
           }
         }
