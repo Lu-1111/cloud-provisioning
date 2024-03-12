@@ -9,8 +9,10 @@ pipeline {
     stage('Build image') {
       steps{
         script {
+          '''
             which docker
             pwd
+           ''' 
           def dockerImage = docker.build("react-app:${env.BUILD_ID}", "-dir ./react-app/Dockerfile")
 
         }
