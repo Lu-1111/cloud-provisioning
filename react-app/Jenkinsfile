@@ -10,6 +10,7 @@ pipeline {
     PROJECT_ID = 'interview-prj1'
     CLUSTER_NAME = 'interview-prj1-cluster'
     LOCATION = 'europe-west1'
+    CREDENTIALS_ID = 'interview-prj1-sa'
   }
   stages {
     stage ('check '){
@@ -63,7 +64,7 @@ pipeline {
                 clusterName: env.CLUSTER_NAME,
                 location: env.LOCATION,
                 manifestPattern: 'deployment.yaml',
-                credentials: env.SECRET_FILE,
+                credentialsId: env.CREDENTIALS_ID,
                 verifyDeployments: true])
         }
       }
