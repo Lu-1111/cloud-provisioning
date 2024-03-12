@@ -30,7 +30,6 @@ pipeline {
       steps{
         script {
           sh '''
-            // addding -e CI=true will force the tests to run once 
           docker run -e CI=true react-app npm run --rm test
           '''
         }
