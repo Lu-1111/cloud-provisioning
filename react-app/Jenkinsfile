@@ -7,6 +7,9 @@ pipeline {
   agent any
   environment {
     SECRET_FILE = credentials('my-creds')
+    PROJECT_ID = 'interview-prj1'
+    CLUSTER_NAME = 'interview-prj1-cluster'
+    LOCATION = 'europe-west1'
   }
   stages {
     stage ('check '){
@@ -45,18 +48,23 @@ pipeline {
            sh  '''
            gcloud auth activate-service-account --key-file=$SECRET_FILE
            gcloud auth configure-docker europe-west1-docker.pkg.dev
-        
             docker tag react-app europe-west1-docker.pkg.dev/interview-prj1/web/react-app
             docker image push europe-west1-docker.pkg.dev/interview-prj1/web/react-app
             '''
-          
         }
       }
     }
     stage('Deploying React.js container to Kubernetes') {
       steps {
         script {
-          kubernetesDeploy(configs: "deployment.yaml")
+                step([
+                $class: 'KubernetesEngineBuilder',
+                projectId: env.PROJECT_ID,
+                clusterName: env.CLUSTER_NAME,
+                location: env.LOCATION,
+                manifestPattern: 'deployment.yaml',
+                credentialsId: env.SECRET_FILE,
+                verifyDeployments: true])
         }
       }
     }
