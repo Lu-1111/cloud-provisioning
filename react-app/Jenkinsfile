@@ -39,7 +39,7 @@ pipeline {
       steps{
         script {
            sh  '''
-            docker image push ("${registry}")
+            docker image push "${registry}"
             '''
           }
         }
