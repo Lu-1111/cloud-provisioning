@@ -63,7 +63,7 @@ pipeline {
                 clusterName: env.CLUSTER_NAME,
                 location: env.LOCATION,
                 manifestPattern: 'deployment.yaml',
-                credentialsId: env.SECRET_FILE,
+                credentials: env.SECRET_FILE,
                 verifyDeployments: true])
         }
       }
