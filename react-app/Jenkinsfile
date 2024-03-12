@@ -40,7 +40,9 @@ pipeline {
         script {
           withCredentials([file(credentialsId: 'my-creds', variable: 'interview-prj1-4e6bb07fceea.json')]) {
            sh  '''
-           gcloud auth activate-service-account --key-file=interview-prj1-4e6bb07fceea.json"
+           cat interview-prj1-4e6bb07fceea.json | docker login -u _json_key_base64 --password-stdin \
+            https://europe-west1-docker.pkg.dev/
+        
             docker tag react-app europe-west1-docker.pkg.dev/interview-prj1/web/react-app
             docker image push europe-west1-docker.pkg.dev/interview-prj1/web/react-app
             '''
