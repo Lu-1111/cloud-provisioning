@@ -4,13 +4,13 @@ FROM node:19-alpine3.16
 WORKDIR /react-app
 #Copy the React.js application dependencies from the
 #package.json to the react-app working directory.
-COPY package.json .
-COPY package-lock.json .
+COPY /react-app/package.json .
+COPY /react-app/package-lock.json .
 #install all the React.js application dependencies
 RUN npm i
 #copy folders
-COPY /src .
-COPY /public .
+COPY /react-app/src .
+COPY /react-app/public .
 #Expose the React.js application container on port 3000
 EXPOSE 3000
 #The command to start the React.js application container
