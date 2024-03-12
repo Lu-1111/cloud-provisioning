@@ -1,3 +1,5 @@
+//FIXUP DOCKER BUILD STAGE AS ITS NOT READING THE DOCKERFILE
+
 
 def registry = 'europe-west1-docker.pkg.dev/interview-prj1/web'
 
@@ -11,7 +13,7 @@ pipeline {
       steps{
         script {
 
-          def dockerImage = docker.build("react-app:${env.BUILD_ID}", "-f Dockerfile" )
+          def dockerImage = docker.build("react-app:${env.BUILD_ID}")
 
         }
       }
