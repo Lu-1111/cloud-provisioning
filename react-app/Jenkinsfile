@@ -21,7 +21,7 @@ pipeline {
       steps{
         script {
          sh '''
-           docker build  --tag 'react-app' -f ./Dockerfile .
+           docker build  --tag 'react-app' -f ./react-app/Dockerfile .
           '''
         }
       }
