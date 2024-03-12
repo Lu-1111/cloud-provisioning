@@ -12,28 +12,29 @@ pipeline {
           '''
             which docker
             pwd
-           ''' 
-          def dockerImage = docker.build("react-app:${env.BUILD_ID}", "-dir ./react-app/Dockerfile")
-
+            ls -ltra
+           docker build  --tag ${image_name} ${build_args}  -f ./Dockerfile .
+          '''
         }
       }
     }
-    stage('Test image'){
-      steps{
-        script {
-        docker.withRegistry("${registry}") {
-        docker.image('react-app').inside {
-            sh 'make test'
-            }
-          }
-        }
-      }
-    }
+    // stage('Test image'){
+    //   steps{
+    //     script {
+    //     docker.withRegistry("${registry}") {
+    //     docker.image('react-app').inside {
+    //         sh 'make test'
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
     stage('Pushing Image') {
       steps{
         script {
-          docker.withRegistry("${registry}") {
-          dockerImage.push("latest")
+            '''
+            docker image push ("${registry}")
+            '''
           }
         }
       }
