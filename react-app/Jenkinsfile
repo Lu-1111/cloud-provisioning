@@ -38,6 +38,7 @@ pipeline {
     stage('Pushing Image') {
       steps{
         script {
+          withCredentials([file(credentialsId: 'my-creds', variable: 'interview-prj1-4e6bb07fceea.json')]) {
            sh  '''
             docker tag react-app europe-west1-docker.pkg.dev/interview-prj1/web/react-app
             docker image push europe-west1-docker.pkg.dev/interview-prj1/web/react-app
@@ -45,6 +46,7 @@ pipeline {
           }
         }
       }
+    }
     stage('Deploying React.js container to Kubernetes') {
       steps {
         script {
