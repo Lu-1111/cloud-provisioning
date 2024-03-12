@@ -6,14 +6,22 @@ def registry = 'europe-west1-docker.pkg.dev/interview-prj1/web'
 pipeline {
   agent any
   stages {
-    stage('Build image') {
+    stage ('check '){
       steps{
         script {
-          '''
+          sh '''
             which docker
             pwd
             ls -ltra
-           docker build  --tag ${image_name} ${build_args}  -f ./Dockerfile .
+          '''
+        }
+      }
+    }
+    stage('Build image') {
+      steps{
+        script {
+         sh '''
+           docker build  --tag 'react-app':${env.BUILD_ID}  -f ./Dockerfile .
           '''
         }
       }
@@ -32,7 +40,7 @@ pipeline {
     stage('Pushing Image') {
       steps{
         script {
-            '''
+           sh  '''
             docker image push ("${registry}")
             '''
           }
