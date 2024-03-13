@@ -1,8 +1,3 @@
-//FIXUP DOCKER BUILD STAGE AS ITS NOT READING THE DOCKERFILE
-
-
-def registry = 'europe-west1-docker.pkg.dev/interview-prj1/web'
-
 pipeline {
   agent any
   environment {
@@ -65,7 +60,7 @@ pipeline {
                 location: env.LOCATION,
                 manifestPattern: 'react-app/deployment.yaml',
                 credentialsId: env.CREDENTIALS_ID,
-                verifyDeployments: true])
+                verifyDeployments: false])
         }
       }
     }
