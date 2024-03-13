@@ -1,0 +1,26 @@
+pipeline{
+    agent any 
+    environment{
+
+    }
+    stages{
+        stage ("Install Helm Chart"){
+            steps{
+                script{
+                    sh '''
+                    helm install react-app-helm ./helm-chart/react-app-helm --namespace react-app-helm 
+                    '''
+                }
+
+            }
+        }
+        // stage(){
+        //     steps{
+        //         script{
+        //             sh '''
+        //             '''
+        //         }
+        //     }
+        // }
+    }
+}
