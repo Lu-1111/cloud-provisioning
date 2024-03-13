@@ -7,6 +7,7 @@ pipeline{
                 script{
                     sh '''
                     export KUBECONFIG=$HOME/.kube/config
+                    kubect 
                     helm install react-app-helm ./helm-chart/react-app-helm --namespace react-app-helm 
                     '''
                 }
