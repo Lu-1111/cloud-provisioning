@@ -44,8 +44,8 @@ pipeline {
            sh  '''
            gcloud auth activate-service-account --key-file=$SECRET_FILE
            gcloud auth configure-docker europe-west1-docker.pkg.dev
-            docker tag react-app europe-west1-docker.pkg.dev/interview-prj1/web/react-app
-            docker image push europe-west1-docker.pkg.dev/interview-prj1/web/react-app
+            docker tag react-app europe-west1-docker.pkg.dev/interview-prj1/web/react-app:test
+            docker image push europe-west1-docker.pkg.dev/interview-prj1/web/react-app:test
             '''
         }
       }

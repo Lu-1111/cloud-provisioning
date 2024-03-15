@@ -46,6 +46,6 @@ spec:
     spec:
       containers:
         - name: react-app
-          image: europe-west1-docker.pkg.dev/interview-prj1/web/react-app:latest
+          image: europe-west1-docker.pkg.dev/interview-prj1/web/react-app:test
           ports:
             - containerPort: 3000
