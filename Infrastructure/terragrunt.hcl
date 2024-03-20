@@ -1,6 +1,6 @@
 locals {
-  project = "interview-prj1"
-  region  = "europe-west1"
+  project = ""
+  region  = ""
 }
 generate "provider" {
   path      = "provider.tf"
