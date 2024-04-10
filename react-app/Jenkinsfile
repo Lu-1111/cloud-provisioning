@@ -2,10 +2,10 @@ pipeline {
   agent any
   environment {
     SECRET_FILE = credentials('my-creds')
-    PROJECT_ID = 'interview-prj1'
-    CLUSTER_NAME = 'interview-prj1-cluster'
+    PROJECT_ID = ''
+    CLUSTER_NAME = ''
     LOCATION = 'europe-west1'
-    CREDENTIALS_ID = 'interview-prj1-sa'
+    CREDENTIALS_ID = ''
   }
   stages {
     stage ('check '){
@@ -44,8 +44,8 @@ pipeline {
            sh  '''
            gcloud auth activate-service-account --key-file=$SECRET_FILE
            gcloud auth configure-docker europe-west1-docker.pkg.dev
-            docker tag react-app europe-west1-docker.pkg.dev/interview-prj1/web/react-app:test
-            docker image push europe-west1-docker.pkg.dev/interview-prj1/web/react-app:test
+            docker tag react-app europe-west1-docker.pkg.dev/<project_ID>/web/react-app:test
+            docker image push europe-west1-docker.pkg.dev/<project_ID>/web/react-app:test
             '''
         }
       }
